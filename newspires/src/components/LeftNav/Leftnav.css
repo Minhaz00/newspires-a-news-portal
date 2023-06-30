@@ -1,0 +1,10 @@
+.categories a{
+    text-decoration: none;
+    color: whitesmoke;
+    background-color: rgb(123, 123, 250);
+    width: 100%;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: small;
+}
