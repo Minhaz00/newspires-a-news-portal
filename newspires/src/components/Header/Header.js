@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { FaNewspaper } from 'react-icons/fa6';
+import { FaNewspaper, FaUser } from 'react-icons/fa6';
+import { FaSignOutAlt } from "react-icons/fa";
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { Image } from 'react-bootstrap';
 
 
 const Header = () => {
+
+    const { user, logout } = useContext(AuthContext);
+    const handleSignOut = () => {
+        logout()
+            .then(() => console.log("logged out successfully!"))
+            .catch ((error) => console.error(error));
+    }
+
     return (
         <div className='mb-3'>
             <Navbar expand="lg" className="bg-body-tertiary">
-            <Container fluid>
+                <Container fluid>
                     <Navbar.Brand href="/">
                         <FaNewspaper></FaNewspaper> {' '}
                         Newspires
@@ -27,7 +38,32 @@ const Header = () => {
                         <Link className='text-decoration-none my-auto m-2 text-black' to={'/categories'}>Categories</Link>
                         <Link className='text-decoration-none my-auto m-2 text-black' to={'/news'}>News</Link>
                     </Nav>
-                </Navbar.Collapse>
+                    </Navbar.Collapse>
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            
+                            {user ?
+                                <>
+                                    <small>{user.displayName}{" "}</small>
+                                    {user.photoURL ?
+                                        <Image className='me-2' style={{ width: "30px" }} roundedCircle src={user.photoURL}></Image>
+                                        :
+                                        <FaUser></FaUser>
+                                    }
+                                    <button onClick={handleSignOut} className='btn btn-danger'>
+                                        <FaSignOutAlt></FaSignOutAlt>{" Logout"}
+                                    </button>
+
+                                </>
+                                :
+                                <>
+                                    <button className='me-2 text-white btn btn-info' ><Link className='text-decoration-none' to={'/login'}>Login</Link></button>
+                                    <button className='me-2 text-white btn btn-info'><Link className='text-decoration-none' to={'/register'}>SignUp</Link></button>
+                                </>
+                            }
+
+                        </Navbar.Text>
+                    </Navbar.Collapse>
             </Container>
             </Navbar>
             
