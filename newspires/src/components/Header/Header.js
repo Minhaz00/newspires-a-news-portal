@@ -1,36 +1,37 @@
 import React from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { FaNewspaper } from 'react-icons/fa6';
 
 
 const Header = () => {
     return (
-        <div>
-            <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid">
-                    <Link class="navbar-brand" href="#">Newspires</Link>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <Link class="nav-link active" aria-current="page" href="/">Home</Link>
-                            <Link class="nav-link" href="/catagories">Catagories</Link>
-                            <Link class="nav-link" href="/about">About</Link>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            {/* <Navbar  className='mb-2 navbar px-4' data-bs-theme="light">
-                <Container>
-                <Navbar.Brand className='text-white' href="/">NEWSPIRES</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link className='text-white' href="/">Home</Nav.Link>
-                    <Nav.Link className='text-white' href="#features">Categories</Nav.Link>
-                    <Nav.Link className='text-white' href="/about">About</Nav.Link>
-                </Nav>
-                </Container>
-            </Navbar> */}
+        <div className='mb-3'>
+            <Navbar expand="lg" className="bg-body-tertiary">
+            <Container fluid>
+                    <Navbar.Brand href="/">
+                        <FaNewspaper></FaNewspaper> {' '}
+                        Newspires
+                    </Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Navbar.Collapse id="navbarScroll">
+                    <Nav
+                        className="me-auto my-2 my-lg-0"
+                        style={{ maxHeight: '100px' }}
+                        navbarScroll
+                    >
+                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/'}>Home</Link>        
+                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/categories'}>Categories</Link>
+                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/news'}>News</Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+            </Navbar>
+            
+
         </div>
     );
 };
