@@ -35,8 +35,8 @@ const Header = () => {
                         navbarScroll
                     >
                         <Link className='text-decoration-none my-auto m-2 text-black' to={'/'}>Home</Link>        
-                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/categories'}>Categories</Link>
-                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/news'}>News</Link>
+                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/category/0'}>Categories</Link>
+                        <Link className='text-decoration-none my-auto m-2 text-black' to={'/'}>News</Link>
                     </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
