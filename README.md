@@ -1,8 +1,6 @@
 # newspires
 A news portal web application. Here user can register and login using google or email/password. User can read and search news category wise.
 
----
-
 <h2>Features</h2>
 <ul>
     <li>Register via google</li>
@@ -13,7 +11,6 @@ A news portal web application. Here user can register and login using google or 
     <li>Responsive for mobile device</li>
 </ul>
 
----
 
 <h2>Used tools and Technologies</h2>
 <ul>
@@ -26,25 +23,24 @@ A news portal web application. Here user can register and login using google or 
     <li>Node JS and Express</li>
 </ul>
 
----
 
 <h2>Project Set Up</h2>
 
-### Server setup:  
+### Server setup
 
-<ul>
-   <li>go to project server folder</li>
-   <li>run : <code>npm install</code></li>
-   <li>run : <code>nodemon index.js</code></li>
-</ul>
+<ol>
+   <li>Go to project server folder</li>
+   <li>Run : <code>npm install</code></li>
+   <li>Run : <code>nodemon index.js</code></li>
+</ol>
 
-### Client setup:  
+### Client setup
 
-<ul>
-   <li>go to project folder</li>
-   <li>run : <code>npm install</code></li>
+<ol>
+   <li>Go to project folder</li>
+   <li>Run : <code>npm install</code></li>
    <li>Create a firebase Project</li>
    <li>Set up src>firebase>firebase.config.js file</li>
-   <li>run : <code>npm start</code></li>
+   <li>Run : <code>npm start</code></li>
 
-</ul>
+</ol>
