@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaNewspaper } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const SignUp = () => {
 
-    const { user, setUser, createUser } = useContext(AuthContext);
+    const [error, setError] = useState("");
+    const [TAndCAccepted, setTAndCAccepted] = useState(false);
+    const { user, setUser, createUser, updateUserProfile } = useContext(AuthContext);
+
+    
 
     const handleSubmit = event => {
         event.preventDefault(); 
@@ -19,22 +24,50 @@ const SignUp = () => {
         const confirm = form.confirm.value;
         console.log(name, email, name, password, confirm, photoURL);
 
+        if (password.length < 6) {
+            setError("Password must be at least 6 characters!");
+            return;
+        }
+
+        if (password !== confirm) {
+            setError("Please make sure your password match!");
+            return;
+        }
+
         createUser(email, password)
             .then(result => {
                 setUser(result.user);
-                user.displayName = name;
-                user.photoURL = photoURL;
                 console.log(user);
+                setError("");
                 form.reset();
+                handleProfileUpdate(name, photoURL);
+                toast.success("Account created successfully!");
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            });
         
+    }
+
+    const handleProfileUpdate = (name, photoURL) => {
+        const profile = {
+            displayName: name,
+            photoURL: photoURL
+        }
+        updateUserProfile(profile)
+            .then(() => { })
+            .catch(error => console.error(error));
+    }
+
+    const handleAccepted = event => {
+        setTAndCAccepted(event.target.checked);
     }
 
     return (
         <div className='login m-auto'>
             <div className='w-50 mt-3 m-auto text-center'>
-                <h2><FaNewspaper></FaNewspaper>Newspires</h2>
+                <Link to={'/'}><h2><FaNewspaper></FaNewspaper>{" Newspires"}</h2></Link>
                 <h6>Please Register</h6>
             </div>
             <Form onSubmit ={handleSubmit}>
@@ -63,7 +96,15 @@ const SignUp = () => {
                     <Form.Control name='confirm' type="password" placeholder="Password" required/>
                 </Form.Group>
 
-                <Button className='w-100' variant="outline-primary" type="submit">
+                <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                    <Form.Check onClick={handleAccepted} type="checkbox" label=<p>Accept our <Link to={'/TandC'}>Terms and Conditions</Link></p>>
+                    </Form.Check>
+                </Form.Group>
+                
+
+                <p className='text-danger'><small>{error}</small></p>
+
+                <Button className='w-100' variant="primary" type="submit" disabled={!TAndCAccepted}>
                     Sign Up
                 </Button>
                 <br />

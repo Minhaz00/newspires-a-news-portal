@@ -5,6 +5,8 @@ import Category from "../components/Category/Category";
 import News from "../components/News/News";
 import Login from "../components/Login/Login";
 import SignUp from "../components/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
+import TandC from "../components/Terms&Condition/TandC";
 
 
 export const router = createBrowserRouter([
@@ -24,8 +26,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/news/:id',
-                element: <News></News>,
+                element: <PrivateRoute><News></News></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
+            },
+            {
+                path: '/TandC',
+                element: <TandC></TandC>
             },
         ]
     },

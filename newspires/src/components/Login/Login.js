@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { FaGithub, FaGoogle, FaNewspaper } from 'react-icons/fa6';
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 
 const Login = () => {
 
+    const [error, setError] = useState("");
     const { googleProviderLogin, signIn } = useContext(AuthContext);
     const googleAuthProvider = new GoogleAuthProvider();
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -24,9 +28,13 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                navigate('/');
+                setError("");
+                navigate(from, {replace: true});
             })
-            .catch(error => console.error(error));
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
+            });
     }
 
     const handleGoogleSignIn = () => {
@@ -42,7 +50,7 @@ const Login = () => {
     return (
         <div className='login m-auto'>
             <div className='w-50 mt-3 m-auto text-center'>
-                <h2><FaNewspaper></FaNewspaper>Newspires</h2>
+                <Link to={'/'}><h2><FaNewspaper></FaNewspaper>{" Newspires"}</h2></Link>
                 <h6>Please Login</h6>
             </div>
             <Form onSubmit={handleSubmit}>
@@ -56,7 +64,9 @@ const Login = () => {
                     <Form.Control name='password' type="password" placeholder="Password" required/>
                 </Form.Group>
 
-                <Button className='w-100' variant="outline-primary" type="submit">
+                <p className='text-danger'><small>{error}</small></p>
+
+                <Button className='w-100' variant="primary" type="submit">
                     Login
                 </Button>
 

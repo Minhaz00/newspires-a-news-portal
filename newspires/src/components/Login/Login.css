@@ -1,3 +1,8 @@
 .login{
     width: 70%;
 }
+
+.login a{
+    text-decoration: none;
+    color: rgb(123, 123, 250);
+}
