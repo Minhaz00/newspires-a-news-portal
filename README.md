@@ -1,5 +1,8 @@
 # Newspires
-A news portal web application. Here user can register and login using google or email/password. User can read and search news category wise.
+A news portal web application. Here user can register and login using google or email/password. User can read and search news category wise. <br/>
+
+## Live Link
+<code>https://newspires-96ae1.web.app/</code> 
 
 <h2>Features</h2>
 <ul>
@@ -19,8 +22,11 @@ A news portal web application. Here user can register and login using google or 
     <li>Bootstrap</li>
     <li>React-icons</li>
     <li>React hot toast</li>
-    <li>Firebase</li>
     <li>Node JS and Express</li>
+    <li>Firebase Authentication</li>
+    <li>Firebase hosting</li>
+    <li>Vercel hosting</li>
+
 </ul>
 
 
