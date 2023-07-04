@@ -2,7 +2,7 @@
 A news portal web application. Here user can register and login using google or email/password. User can read and search news category wise. <br/>
 
 ## Live Link
-<code>https://newspires-96ae1.web.app/</code> 
+>https://newspires-96ae1.web.app/ 
 
 <h2>Features</h2>
 <ul>
